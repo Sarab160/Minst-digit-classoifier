@@ -6,7 +6,7 @@ import matplotlib.pyplot as plt
 from sklearn.model_selection import train_test_split
 from sklearn.datasets import fetch_openml
 from sklearn.preprocessing import StandardScaler
-from sklearn.metrics import f1_score, precision_score, recall_score
+from sklearn.metrics import f1_score, precision_score, recall_score,confusion_matrix,classification_report
 from sklearn.ensemble import RandomForestClassifier
 
 # -----------------------------
@@ -32,7 +32,7 @@ for i, ax in enumerate(axis.ravel()):
 
 plt.tight_layout()
 plt.show()
-
+plt.savefig("sample digits..jpg")
 # -----------------------------
 # 3 Train Test Split
 # -----------------------------
@@ -71,6 +71,18 @@ print("Precision:", precision_score(y_test, y_pred, average='macro'))
 print("Recall:", recall_score(y_test, y_pred, average='macro'))
 print("F1 Score:", f1_score(y_test, y_pred, average='macro'))
 
+conf=confusion_matrix(y_test,y_pred)
+
+
+sns.heatmap(data=conf, annot=True, fmt='d', cmap='rocket')
+plt.xlabel("Predicted Label")
+plt.ylabel("True Label")
+plt.show()
+plt.savefig("confusion matrix.jpg")
+
+# -----------------------------
+print("\nClassification Report:\n")
+print(classification_report(y_test, y_pred))
 # -----------------------------
 # 7 Predict on Unseen Data
 # -----------------------------
@@ -98,3 +110,4 @@ for i, ax in enumerate(axes.ravel()):
 
 plt.tight_layout()
 plt.show()
+plt.savefig("prediction.jpg")
